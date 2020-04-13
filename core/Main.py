@@ -70,8 +70,35 @@ async def surv(ctx):
 
 
 @client.command()
+async def all(ctx):
+    countTU = str(serverTU.player_count())
+    countTT = str(serverTT.player_count())
+    countSA = str(serverSA.player_count())
+    countSURV = str(serverSURV.player_count())
+
+    reply = (
+        "```\n"
+        "Toss Up:           " + countTU + " players\n"
+        "Tower Takeover:    " + countTT + " players\n"
+        "Sack Attack:       " + countSA + " players\n"
+        "Survival:          " + countSURV + " players\n"
+        "```"
+    )
+
+    await ctx.send(reply)
+
+
+@client.command()
 async def help(ctx):
-    reply = "```\n!tu\tToss Up\n!tt\tTower Takeover\n!sa\tSack Attack\n!surv  Survival\n```"
+    reply = (
+        "```\n"
+        "!tu    Toss Up\n"
+        "!tt    Tower Takeover\n"
+        "!sa    Sack Attack\n"
+        "!surv  Survival\n"
+        "!all   All Servers\n"
+        "```"
+    )
 
     await ctx.send(reply)
 
