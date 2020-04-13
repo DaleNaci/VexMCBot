@@ -15,6 +15,7 @@ client.remove_command("help")
 serverTU = MinecraftServer("Vextossup.join-mc.net")
 serverTT = MinecraftServer("51.161.120.109:25616")
 serverSA = MinecraftServer("sackattack.join-game.net")
+serverSURV = MinecraftServer("144.217.103.86:25586")
 
 
 def format_response(response):
@@ -61,8 +62,16 @@ async def sa(ctx):
 
 
 @client.command()
+async def surv(ctx):
+    lookup = serverSURV.server_lookup()
+    response = format_response(lookup)
+
+    await ctx.send(response)
+
+
+@client.command()
 async def help(ctx):
-    reply = "```\n!tu\tToss Up\n!tt\tTower Takeover\n!sa\tSack Attack\n```"
+    reply = "```\n!tu\tToss Up\n!tt\tTower Takeover\n!sa\tSack Attack\n!surv  Survival\n```"
 
     await ctx.send(reply)
 
