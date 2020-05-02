@@ -8,13 +8,13 @@ from MinecraftServer import MinecraftServer
 
 
 Client = discord.Client()
-client = commands.Bot(command_prefix = "!")
+bot = commands.Bot(command_prefix = "!")
 
-client.remove_command("help")
+bot.remove_command("help")
 
 serverTU = MinecraftServer("Vextossup.join-mc.net")
 serverTT = MinecraftServer("51.161.120.109:25616")
-serverSA = MinecraftServer("sackattack.join-game.net")
+serverNE = MinecraftServer("sackattack.join-game.net")
 serverSURV = MinecraftServer("144.217.103.86:25586")
 
 
@@ -32,12 +32,12 @@ def format_response(response):
     return reply
 
 
-@client.event
+@bot.event
 async def on_ready():
     print("Bot is ready!")
 
 
-@client.command()
+@bot.command()
 async def tu(ctx):
     lookup = serverTU.server_lookup()
     response = format_response(lookup)
@@ -45,7 +45,7 @@ async def tu(ctx):
     await ctx.send(response)
 
 
-@client.command()
+@bot.command()
 async def tt(ctx):
     lookup = serverTT.server_lookup()
     response = format_response(lookup)
@@ -53,15 +53,15 @@ async def tt(ctx):
     await ctx.send(response)
 
 
-@client.command()
-async def sa(ctx):
-    lookup = serverSA.server_lookup()
+@bot.command()
+async def ne(ctx):
+    lookup = serverNE.server_lookup()
     response = format_response(lookup)
 
     await ctx.send(response)
 
 
-@client.command()
+@bot.command()
 async def surv(ctx):
     lookup = serverSURV.server_lookup()
     response = format_response(lookup)
@@ -69,18 +69,18 @@ async def surv(ctx):
     await ctx.send(response)
 
 
-@client.command()
+@bot.command()
 async def all(ctx):
     countTU = str(serverTU.player_count())
     countTT = str(serverTT.player_count())
-    countSA = str(serverSA.player_count())
+    countNE = str(serverNE.player_count())
     countSURV = str(serverSURV.player_count())
 
     reply = (
         "```\n"
         "Toss Up:           " + countTU + " players\n"
         "Tower Takeover:    " + countTT + " players\n"
-        "Sack Attack:       " + countSA + " players\n"
+        "Nether Survival:   " + countNE + " players\n"
         "Survival:          " + countSURV + " players\n"
         "```"
     )
@@ -88,13 +88,13 @@ async def all(ctx):
     await ctx.send(reply)
 
 
-@client.command()
+@bot.command()
 async def help(ctx):
     reply = (
         "```\n"
         "!tu    Toss Up\n"
         "!tt    Tower Takeover\n"
-        "!sa    Sack Attack\n"
+        "!ne    Nether Survival\n"
         "!surv  Survival\n"
         "!all   All Servers\n"
         "```"
@@ -107,4 +107,4 @@ with open("token.txt", "r") as f:
     lines = f.readlines()
     token = lines[0].strip()
 
-client.run(token)
+bot.run(token)
