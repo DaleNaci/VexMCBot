@@ -14,7 +14,7 @@ bot.remove_command("help")
 
 serverTU = MinecraftServer("Vextossup.join-mc.net")
 serverTT = MinecraftServer("51.161.120.109:25616")
-serverNE = MinecraftServer("sackattack.join-game.net")
+serverCTF = MinecraftServer("sackattack.join-game.net")
 serverSURV = MinecraftServer("144.217.103.86:25586")
 
 
@@ -54,8 +54,8 @@ async def tt(ctx):
 
 
 @bot.command()
-async def ne(ctx):
-    lookup = serverNE.server_lookup()
+async def ctf(ctx):
+    lookup = serverCTF.server_lookup()
     response = format_response(lookup)
 
     await ctx.send(response)
@@ -73,14 +73,14 @@ async def surv(ctx):
 async def all(ctx):
     countTU = str(serverTU.player_count())
     countTT = str(serverTT.player_count())
-    countNE = str(serverNE.player_count())
+    countCTF = str(serverCTF.player_count())
     countSURV = str(serverSURV.player_count())
 
     reply = (
         "```\n"
         "Toss Up:           " + countTU + " players\n"
         "Tower Takeover:    " + countTT + " players\n"
-        "Nether Survival:   " + countNE + " players\n"
+        "Capture The Flag:  " + countCTF + " players\n"
         "Survival:          " + countSURV + " players\n"
         "```"
     )
@@ -94,7 +94,7 @@ async def help(ctx):
         "```\n"
         "!tu    Toss Up\n"
         "!tt    Tower Takeover\n"
-        "!ne    Nether Survival\n"
+        "!ctf   Capture The Flag\n"
         "!surv  Survival\n"
         "!all   All Servers\n"
         "```"
